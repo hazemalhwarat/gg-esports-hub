@@ -1,0 +1,17 @@
+{
+  "generated_at": "2026-07-17T12:00:00+00:00",
+  "streams": [
+    {"id":"twitch:teamfalcons","platform":"twitch","channel":"Team Falcons","title":"Team Falcons vs Vitality — EWC 2026 CS2 Playoffs","game":"CS2","viewers":84210,"url":"https://twitch.tv/teamfalcons","thumbnail":"","is_priority":true,"priority_org":"Team Falcons","started_at":"2026-07-17T11:10:00+00:00"},
+    {"id":"twitch:esportsworldcup","platform":"twitch","channel":"Esports World Cup","title":"EWC 2026 Main Stage — Dota 2 Group A","game":"Dota 2","viewers":152300,"url":"https://twitch.tv/esportsworldcup","thumbnail":"","is_priority":false,"priority_org":null,"started_at":"2026-07-17T10:00:00+00:00"},
+    {"id":"kick:team-falcons","platform":"kick","channel":"Twisted Minds","title":"OWCS Midseason — Twisted Minds vs Sentinels","game":"Valorant","viewers":61120,"url":"https://kick.com/twisted-minds","thumbnail":"","is_priority":true,"priority_org":"Twisted Minds","started_at":"2026-07-17T11:30:00+00:00"}
+  ],
+  "matches": [
+    {"id":"sample:live1","game":"CS2","tournament":"EWC 2026 CS2 Playoffs","team_a":"Team Falcons","team_b":"Vitality","score_a":1,"score_b":1,"status":"live","start_time":"2026-07-17T11:10:00+00:00","source":"hltv","url":"https://www.hltv.org","tier":"premier","is_priority":true,"priority_org":"Team Falcons"},
+    {"id":"sample:up1","game":"Valorant","tournament":"OWCS Midseason Championship","team_a":"Twisted Minds","team_b":"Paper Rex","score_a":null,"score_b":null,"status":"upcoming","start_time":"2026-07-17T16:00:00+00:00","source":"vlr","url":"https://www.vlr.gg","tier":"premier","is_priority":true,"priority_org":"Twisted Minds"},
+    {"id":"sample:done1","game":"Dota 2","tournament":"EWC 2026 Dota 2 Group A","team_a":"Nigma Galaxy","team_b":"PARIVISION","score_a":2,"score_b":0,"status":"finished","start_time":"2026-07-17T08:00:00+00:00","source":"opendota","url":"https://www.opendota.com","tier":"premier","is_priority":true,"priority_org":"Nigma Galaxy"},
+    {"id":"sample:done2","game":"Rocket League","tournament":"RLCS 2026","team_a":"Team Falcons","team_b":"Karmine Corp","score_a":4,"score_b":2,"status":"finished","start_time":"2026-07-16T18:00:00+00:00","source":"octane","url":"https://octane.gg","tier":"regular","is_priority":true,"priority_org":"Team Falcons"}
+  ],
+  "tournaments": [
+    {"id":"sample:t1","name":"Esports World Cup 2026","game":"CS2, Dota 2, Valorant","status":"ongoing","start_time":"2026-07-06T12:00:00+00:00","end_time":"2026-08-23T20:00:00+00:00","source":"startgg","url":"https://liquipedia.net","prize":"$75,000,000+"}
+  ]
+}
