@@ -3,7 +3,7 @@
   "streams": [
     {"id":"twitch:teamfalcons","platform":"twitch","channel":"Team Falcons","title":"Team Falcons vs Vitality — EWC 2026 CS2 Playoffs","game":"CS2","viewers":84210,"url":"https://twitch.tv/teamfalcons","thumbnail":"","is_priority":true,"priority_org":"Team Falcons","started_at":"2026-07-17T11:10:00+00:00"},
     {"id":"twitch:esportsworldcup","platform":"twitch","channel":"Esports World Cup","title":"EWC 2026 Main Stage — Dota 2 Group A","game":"Dota 2","viewers":152300,"url":"https://twitch.tv/esportsworldcup","thumbnail":"","is_priority":false,"priority_org":null,"started_at":"2026-07-17T10:00:00+00:00"},
-    {"id":"kick:team-falcons","platform":"kick","channel":"Twisted Minds","title":"OWCS Midseason — Twisted Minds vs Sentinels","game":"Valorant","viewers":61120,"url":"https://kick.com/twisted-minds","thumbnail":"","is_priority":true,"priority_org":"Twisted Minds","started_at":"2026-07-17T11:30:00+00:00"}
+    {"id":"kick:twisted-minds","platform":"kick","channel":"Twisted Minds","title":"OWCS Midseason — Twisted Minds vs Sentinels","game":"Valorant","viewers":61120,"url":"https://kick.com/twisted-minds","thumbnail":"","is_priority":true,"priority_org":"Twisted Minds","started_at":"2026-07-17T11:30:00+00:00"}
   ],
   "matches": [
     {"id":"sample:live1","game":"CS2","tournament":"EWC 2026 CS2 Playoffs","team_a":"Team Falcons","team_b":"Vitality","score_a":1,"score_b":1,"status":"live","start_time":"2026-07-17T11:10:00+00:00","source":"hltv","url":"https://www.hltv.org","tier":"premier","is_priority":true,"priority_org":"Team Falcons"},

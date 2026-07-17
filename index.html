@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>GG Esports Hub</title>
+<style>
+  :root { color-scheme: dark; }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: #0b0e14; color: #e6e9ef;
+    font-family: "Segoe UI", Tahoma, system-ui, sans-serif;
+  }
+  a { color: inherit; text-decoration: none; }
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 24px 16px; }
+  .head {
+    display: flex; align-items: center; justify-content: space-between;
+    border-bottom: 1px solid #232b39; padding-bottom: 16px; gap: 12px;
+  }
+  .title { font-size: 24px; font-weight: 800; margin: 0; }
+  .title span { color: #7c5cff; }
+  .sub { color: #8b93a3; font-size: 13px; margin: 4px 0 0; }
+  .btn {
+    background: #141922; color: #e6e9ef; border: 1px solid #232b39;
+    border-radius: 10px; padding: 7px 12px; font-size: 13px; cursor: pointer;
+  }
+  .btn:hover { background: #1b212d; }
+  .updated { color: #6a7284; font-size: 11px; margin-top: 6px; text-align: left; }
+  .tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; align-items: center; }
+  .tab {
+    border: none; border-radius: 999px; padding: 7px 16px; font-size: 14px;
+    font-weight: 500; cursor: pointer; background: #141922; color: #cfd4de;
+  }
+  .tab.active { background: #7c5cff; color: #fff; }
+  .filter { margin-inline-start: auto; display: flex; align-items: center; gap: 8px; font-size: 13px; color: #cfd4de; cursor: pointer; }
+  .sec-title { display: flex; align-items: center; gap: 8px; font-size: 18px; font-weight: 600; margin: 24px 0 12px; }
+  .count { background: #1b212d; color: #8b93a3; border-radius: 999px; padding: 2px 8px; font-size: 12px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+  .card {
+    border: 1px solid #232b39; background: #141922; border-radius: 14px;
+    overflow: hidden; cursor: pointer; text-align: start; transition: transform .12s;
+  }
+  .card:hover { transform: translateY(-2px); }
+  .card.prio { border-color: rgba(0,194,168,.6); }
+  .thumb { position: relative; aspect-ratio: 16/9; background: #1b212d; }
+  .thumb img { width: 100%; height: 100%; object-fit: cover; }
+  .badge { position: absolute; font-size: 10px; padding: 2px 6px; border-radius: 5px; }
+  .live { background: #ff4655; color: #fff; top: 8px; inset-inline-start: 8px; font-weight: 700; animation: pulse 1.4s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.45} }
+  .views { background: rgba(0,0,0,.7); bottom: 8px; inset-inline-end: 8px; }
+  .plat { background: rgba(0,0,0,.7); top: 8px; inset-inline-end: 8px; text-transform: uppercase; }
+  .card-body { padding: 12px; }
+  .chan { font-size: 14px; font-weight: 600; display: flex; align-items: center; gap: 6px; }
+  .porg { background: rgba(0,194,168,.2); color: #00c2a8; font-size: 10px; padding: 2px 6px; border-radius: 5px; }
+  .ctitle { font-size: 12px; color: #8b93a3; margin: 4px 0 0; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .cgame { font-size: 11px; color: #6a7284; margin-top: 4px; }
+  .row {
+    display: flex; align-items: center; gap: 12px; border: 1px solid #232b39;
+    background: #141922; border-radius: 12px; padding: 12px 14px; margin-bottom: 8px;
+  }
+  .row.prio { border-color: rgba(0,194,168,.5); }
+  .row:hover { background: #1b212d; }
+  .rgame { width: 70px; flex-shrink: 0; font-size: 11px; color: #6a7284; }
+  .teams { flex: 1; display: flex; align-items: center; justify-content: center; gap: 12px; font-size: 14px; }
+  .ta { flex: 1; text-align: end; font-weight: 500; }
+  .tb { flex: 1; font-weight: 500; }
+  .score { background: #1b212d; border-radius: 6px; padding: 2px 8px; font-family: monospace; font-size: 13px; }
+  .status { width: 56px; flex-shrink: 0; text-align: center; font-size: 10px; }
+  .status.slive { color: #ff4655; }
+  .status.sother { color: #6a7284; }
+  .empty { border: 1px dashed #232b39; background: rgba(20,25,34,.4); border-radius: 14px; padding: 32px; text-align: center; color: #6a7284; font-size: 14px; }
+  .tour { border: 1px solid #232b39; background: #141922; border-radius: 14px; padding: 16px; }
+  .tour:hover { background: #1b212d; }
+  .tour .n { font-weight: 600; }
+  .tour .meta { display: flex; justify-content: space-between; font-size: 12px; color: #8b93a3; margin-top: 8px; }
+  .modal { position: fixed; inset: 0; background: rgba(0,0,0,.85); display: flex; align-items: center; justify-content: center; padding: 16px; z-index: 50; }
+  .modal-inner { width: 100%; max-width: 900px; background: #0b0e14; border: 1px solid #232b39; border-radius: 16px; overflow: hidden; }
+  .modal-head { display: flex; align-items: center; justify-content: space-between; padding: 8px 14px; border-bottom: 1px solid #232b39; }
+  .modal-body { aspect-ratio: 16/9; background: #000; }
+  .modal-body iframe { width: 100%; height: 100%; border: 0; }
+  .close { background: none; border: none; color: #8b93a3; font-size: 18px; cursor: pointer; }
+  .hidden { display: none; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="head">
+    <div>
+      <h1 class="title">GG <span>Esports Hub</span></h1>
+      <p class="sub">كل منافسات الايسبورتس في مكان واحد</p>
+    </div>
+    <div>
+      <button class="btn" onclick="load()">تحديث</button>
+      <div class="updated" id="updated"></div>
+    </div>
+  </div>
+
+  <div class="tabs" id="tabs"></div>
+
+  <div id="content"></div>
+</div>
+
+<div id="modal"></div>
+
+<script>
+const TABS = [
+  { id: "live", label: "مباشر الآن" },
+  { id: "streams", label: "البثوث" },
+  { id: "upcoming", label: "مباريات قادمة" },
+  { id: "results", label: "النتائج" },
+  { id: "tournaments", label: "البطولات" },
+];
+
+let state = { data: null, tab: "live", priorityOnly: false };
+
+function esc(s) {
+  return (s == null ? "" : String(s)).replace(/[&<>"']/g, c =>
+    ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[c]));
+}
+function num(n) { return (n || 0).toLocaleString("en-US"); }
+
+async function load() {
+  try {
+    const res = await fetch("./data.json?ts=" + Date.now(), { cache: "no-store" });
+    state.data = await res.json();
+    render();
+  } catch (e) { /* keep last */ }
+}
+
+function fp(arr) { return state.priorityOnly ? arr.filter(x => x.is_priority) : arr; }
+
+function renderTabs() {
+  const el = document.getElementById("tabs");
+  el.innerHTML = TABS.map(t =>
+    `<button class="tab ${state.tab === t.id ? "active" : ""}" onclick="setTab('${t.id}')">${t.label}</button>`
+  ).join("") +
+  `<label class="filter"><input type="checkbox" ${state.priorityOnly ? "checked" : ""} onchange="togglePrio(this)"> الفرق العربية فقط</label>`;
+}
+
+function setTab(id) { state.tab = id; render(); }
+function togglePrio(cb) { state.priorityOnly = cb.checked; render(); }
+
+function streamCard(s) {
+  return `<div class="card ${s.is_priority ? "prio" : ""}" onclick='openStream(${JSON.stringify(s).replace(/'/g, "&#39;")})'>
+    <div class="thumb">
+      ${s.thumbnail ? `<img src="${esc(s.thumbnail)}" alt="${esc(s.channel)}">` : ""}
+      <span class="badge live">LIVE</span>
+      <span class="badge views">👁 ${num(s.viewers)}</span>
+      <span class="badge plat">${esc(s.platform)}</span>
+    </div>
+    <div class="card-body">
+      <div class="chan">${esc(s.channel)} ${s.is_priority ? `<span class="porg">${esc(s.priority_org)}</span>` : ""}</div>
+      <div class="ctitle">${esc(s.title)}</div>
+      ${s.game ? `<div class="cgame">${esc(s.game)}</div>` : ""}
+    </div>
+  </div>`;
+}
+
+function matchRow(m) {
+  const st = m.status === "live" ? "slive" : "sother";
+  const stl = m.status === "live" ? "مباشر" : m.status === "finished" ? "انتهت" : "قادمة";
+  return `<a class="row ${m.is_priority ? "prio" : ""}" href="${esc(m.url)}" target="_blank" rel="noreferrer">
+    <span class="rgame">${esc(m.game)}</span>
+    <span class="teams">
+      <span class="ta">${esc(m.team_a)}</span>
+      <span class="score">${m.score_a ?? "-"} : ${m.score_b ?? "-"}</span>
+      <span class="tb">${esc(m.team_b)}</span>
+    </span>
+    <span class="status ${st}">${stl}</span>
+  </a>`;
+}
+
+function tourCard(t) {
+  return `<a class="tour" href="${esc(t.url)}" target="_blank" rel="noreferrer">
+    <div class="n">${esc(t.name)}</div>
+    <div class="meta"><span>${esc(t.game)}</span><span>${fmtDate(t.start_time)}</span></div>
+  </a>`;
+}
+
+function fmtDate(iso) {
+  if (!iso) return "";
+  try { return new Date(iso).toLocaleString("ar", { month:"short", day:"numeric", hour:"2-digit", minute:"2-digit" }); }
+  catch { return iso; }
+}
+
+function grid(items, fn, emptyMsg) {
+  if (!items.length) return `<div class="empty">${emptyMsg}</div>`;
+  return `<div class="grid">${items.map(fn).join("")}</div>`;
+}
+function list(items, fn, emptyMsg) {
+  if (!items.length) return `<div class="empty">${emptyMsg}</div>`;
+  return items.map(fn).join("");
+}
+
+function render() {
+  renderTabs();
+  const d = state.data || { streams: [], matches: [], tournaments: [] };
+  const streams = fp(d.streams || []);
+  const live = fp((d.matches || []).filter(m => m.status === "live"));
+  const upcoming = fp((d.matches || []).filter(m => m.status === "upcoming"));
+  const finished = fp((d.matches || []).filter(m => m.status === "finished"));
+  const tours = fp(d.tournaments || []);
+  const c = document.getElementById("content");
+
+  if (state.tab === "live") {
+    c.innerHTML =
+      `<div class="sec-title">بث مباشر الآن <span class="count">${streams.length}</span></div>` +
+      grid(streams, streamCard, "لا يوجد بث مباشر حالياً") +
+      `<div class="sec-title">مباريات مباشرة <span class="count">${live.length}</span></div>` +
+      list(live, matchRow, "لا توجد مباريات مباشرة");
+  } else if (state.tab === "streams") {
+    c.innerHTML = grid(streams, streamCard, "لا يوجد بث مباشر حالياً");
+  } else if (state.tab === "upcoming") {
+    c.innerHTML = list(upcoming, matchRow, "لا توجد مباريات قادمة");
+  } else if (state.tab === "results") {
+    c.innerHTML = list(finished, matchRow, "لا توجد نتائج لعرضها");
+  } else if (state.tab === "tournaments") {
+    c.innerHTML = grid(tours, tourCard, "لا توجد بطولات قادمة");
+  }
+
+  const up = document.getElementById("updated");
+  if (d.generated_at) {
+    const diff = Math.max(0, (Date.now() - new Date(d.generated_at).getTime()) / 1000);
+    up.textContent = "آخر تحديث قبل " + (diff < 60 ? Math.floor(diff) + " ثانية" : Math.floor(diff/60) + " دقيقة");
+  }
+}
+
+function openStream(s) {
+  let src = null;
+  const host = location.hostname || "localhost";
+  if (s.platform === "twitch") {
+    const login = s.url.split("/").filter(Boolean).pop();
+    src = `https://player.twitch.tv/?channel=${login}&parent=${host}&autoplay=true`;
+  } else if (s.platform === "youtube") {
+    try { const v = new URL(s.url).searchParams.get("v"); if (v) src = `https://www.youtube.com/embed/${v}?autoplay=1`; } catch {}
+  } else if (s.platform === "kick") {
+    const slug = s.url.split("/").filter(Boolean).pop();
+    src = `https://player.kick.com/${slug}`;
+  }
+  const m = document.getElementById("modal");
+  m.innerHTML = `<div class="modal" onclick="closeModal(event)">
+    <div class="modal-inner" onclick="event.stopPropagation()">
+      <div class="modal-head"><span>${esc(s.channel)}</span><button class="close" onclick="closeModal(event)">✕</button></div>
+      <div class="modal-body">${src ? `<iframe src="${src}" allow="autoplay; fullscreen" allowfullscreen></iframe>` : `<div class="empty">تعذّر تضمين البث</div>`}</div>
+    </div>
+  </div>`;
+}
+function closeModal(e) { document.getElementById("modal").innerHTML = ""; }
+
+load();
+setInterval(load, 60000);
+setInterval(render, 10000);
+</script>
+</body>
+</html>
